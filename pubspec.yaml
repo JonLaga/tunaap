@@ -1,0 +1,43 @@
+name: tunapp
+description: "Tunapp Fishing - Arquitectura Elite para Pesca Deportiva"
+
+# Evita que se publique por error en pub.dev
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # --- UI y Diseño ---
+  cupertino_icons: ^1.0.6 # Versión estable
+
+  # --- El Motor de Tunapp Fishing ---
+  geolocator: ^12.0.0 # Versión estable
+  firebase_core: ^3.6.0 # Actualizado para compatibilidad con CMake 3.30+
+  cloud_firestore: ^5.4.0 # Actualizado
+  firebase_storage: ^12.3.0 # Actualizado
+  image_picker: ^1.1.2 # Versión estable
+  google_maps_flutter: ^2.7.0 # Versión estable
+
+  # --- GESTIÓN DE ESTADO (EL CEREBRO) ---
+  flutter_riverpod: ^2.5.1 # Versión estable
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0 # Versión estable
+
+flutter:
+  uses-material-design: true
+
+  # Si en el futuro añades iconos o fuentes personalizadas, irán aquí:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
