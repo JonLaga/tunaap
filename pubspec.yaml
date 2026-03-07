@@ -36,6 +36,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  # --- ASSETS (Imágenes, etc.) ---
+  assets:
+    - assets/images/fishing/  # Al poner la ruta con / al final, incluyes TODO lo que esté dentro
+
   # Si en el futuro añades iconos o fuentes personalizadas, irán aquí:
   # fonts:
   #   - family: Schyler

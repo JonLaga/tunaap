@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // --- IMPORTACIONES ABSOLUTAS CORREGIDAS ---
 import 'package:tunapp/features/boat/providers/canas_provider.dart';
 import 'package:tunapp/features/inventory/providers/inventory_providers.dart';
-import 'package:tunapp/features/inventory/domain/models/senuelo_model.dart';
 
 class MiBarcoScreen extends ConsumerStatefulWidget {
   const MiBarcoScreen({super.key});
@@ -40,7 +39,7 @@ class _MiBarcoScreenState extends ConsumerState<MiBarcoScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               DropdownButtonFormField<String>(
-                value: senueloSeleccionado,
+                initialValue: senueloSeleccionado,
                 decoration: const InputDecoration(labelText: 'Muestra'),
                 isExpanded: true,
                 items: opcionesMuestras.map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),

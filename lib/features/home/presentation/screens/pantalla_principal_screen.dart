@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Importamos las pantallas a las que queremos navegar
 import 'package:tunapp/features/boat/presentation/screens/mi_barco_screen.dart';
 import 'package:tunapp/features/inventory/presentation/screens/mi_caja_screen.dart';
 import 'package:tunapp/features/fishing_session/presentation/screens/pesca_screen.dart';
+import 'package:tunapp/features/fishing_session/providers/fishing_session_provider.dart';
 
 /// Pantalla de bienvenida y navegación principal de la aplicación.
-class PantallaPrincipalScreen extends StatelessWidget {
+class PantallaPrincipalScreen extends ConsumerWidget {
   const PantallaPrincipalScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tunapp Fishing', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -44,7 +46,24 @@ class PantallaPrincipalScreen extends StatelessWidget {
                 label: "¡A PESCAR!",
                 color: Colors.red.shade700,
                 isBig: true,
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PescaScreen())),
+                onTap: () async {
+                  // 1. Consultamos al repositorio si la configuración es válida (4-7 cañas)
+                  final isValid = await ref.read(fishingRepositoryProvider).isConfigurationValid();
+
+                  if (!context.mounted) return;
+
+                  if (isValid) {
+                    // 2. Si es válido, entramos a pescar
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const PescaScreen()));
+                  } else {
+                    // 3. Si no, avisamos y redirigimos a configuración
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Configura entre 4 y 7 cañas para empezar.")),
+                    );
+                    // Asumimos que MiBarcoScreen es donde se configuran las cañas
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const MiBarcoScreen()));
+                  }
+                },
               ),
             ],
           ),
